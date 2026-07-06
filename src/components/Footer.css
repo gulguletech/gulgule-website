@@ -58,6 +58,13 @@
   font-size: 0.82rem;
   color: #555;
 }
+.footer__address {
+  font-size: 0.78rem;
+  color: #444;
+  max-width: 640px;
+  margin: 0 auto 8px;
+  line-height: 1.6;
+}
 
 @media (max-width: 900px) {
   .footer__inner { grid-template-columns: 1fr 1fr; gap: 32px; }
