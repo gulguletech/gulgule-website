@@ -54,7 +54,7 @@ export default function Footer() {
 
       <div className="footer__bottom">
         <p className="footer__address">
-          Registered address — 3rd Floor, Vajra Building, Bellandur, NGEF Layout,
+         3rd Floor, Vajra Building, Bellandur, NGEF Layout,
           Sadanandanagar, Bennigana Halli, Bengaluru, Karnataka 560038
         </p>
         <p>Copyright 2026 @ LumX Pvt. Ltd. All rights reserved.</p>
