@@ -1,20 +1,16 @@
 // Base URL of the Spring Boot backend (backend-tv).
 //
-// In production (e.g. on Vercel), set the environment variable
-// REACT_APP_API_BASE_URL to your deployed backend's URL, for example:
-//
-//   REACT_APP_API_BASE_URL=https://your-backend.onrender.com
-//
-// CRA only reads REACT_APP_* env vars, and only at build time — after
-// changing it on your host, you must trigger a new deployment/build.
-// Locally, create a `.env` file at the project root (same level as
-// package.json) with that line, then restart `npm start`.
-//
-// If it isn't set, this falls back to localhost:8080 for local dev against
-// a backend running on your machine.
+// Hardcoded directly here so it works regardless of Vercel/CRA env var
+// setup. If you ever move the backend to a new URL, just change the line
+// below and redeploy — that's the only place it needs to change.
+const HARDCODED_API_BASE_URL = 'https://backend-tv-x7kh.onrender.com';
+
+// Still supports overriding via REACT_APP_API_BASE_URL if you set it later
+// (e.g. to point a preview deployment at a staging backend), but the
+// hardcoded value above is what's used if that env var isn't set.
 export const API_BASE_URL =
   (typeof process !== 'undefined' && process.env && process.env.REACT_APP_API_BASE_URL) ||
-  'http://localhost:8080';
+  HARDCODED_API_BASE_URL;
 
 export const ADMIN_TOKEN_KEY = 'gulgule_admin_token';
 export const ADMIN_USERNAME_KEY = 'gulgule_admin_username';
