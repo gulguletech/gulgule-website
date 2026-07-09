@@ -10,6 +10,9 @@ import UserDetail from './pages/UserDetail';
 import Verifications from './pages/Verifications';
 import Transactions from './pages/Transactions';
 import Calls from './pages/Calls';
+import Pricing from './pages/Pricing';
+import Agencies from './pages/Agencies';
+import AgencyDetail from './pages/AgencyDetail';
 
 // Mounted at "/admin/*" in App.jsx. There is deliberately no visible link
 // to this anywhere in the public site — reaching it means typing /admin
@@ -33,6 +36,9 @@ export default function AdminApp() {
           <Route path="verifications" element={<Verifications />} />
           <Route path="transactions" element={<Transactions />} />
           <Route path="calls" element={<Calls />} />
+          <Route path="pricing" element={<Pricing />} />
+          <Route path="agencies" element={<Agencies />} />
+          <Route path="agencies/:id" element={<AgencyDetail />} />
           <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
         </Route>
       </Routes>

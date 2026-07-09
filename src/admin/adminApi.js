@@ -76,4 +76,38 @@ export const adminApi = {
     request(`/api/admin/transactions?page=${page}${userId ? `&userId=${encodeURIComponent(userId)}` : ''}`),
 
   ongoingCalls: () => request('/api/admin/calls/ongoing'),
+
+  // ── Pricing (coin economics + recharge packages) ────────────────────────
+  getPricingConfig: () => request('/api/admin/pricing'),
+
+  updatePricingConfig: (config) =>
+    request('/api/admin/pricing', { method: 'PUT', body: config }),
+
+  listRechargePackages: () => request('/api/admin/pricing/packages'),
+
+  createRechargePackage: (pkg) =>
+    request('/api/admin/pricing/packages', { method: 'POST', body: pkg }),
+
+  updateRechargePackage: (id, pkg) =>
+    request(`/api/admin/pricing/packages/${id}`, { method: 'PUT', body: pkg }),
+
+  deleteRechargePackage: (id) =>
+    request(`/api/admin/pricing/packages/${id}`, { method: 'DELETE' }),
+
+  // ── Agencies ─────────────────────────────────────────────────────────────
+  listAgencies: (page = 0) => request(`/api/admin/agencies?page=${page}`),
+
+  getAgency: (id) => request(`/api/admin/agencies/${id}`),
+
+  createAgency: (agency) =>
+    request('/api/admin/agencies', { method: 'POST', body: agency }),
+
+  updateAgency: (id, agency) =>
+    request(`/api/admin/agencies/${id}`, { method: 'PUT', body: agency }),
+
+  regenerateAgencyPassword: (id) =>
+    request(`/api/admin/agencies/${id}/regenerate-password`, { method: 'POST' }),
+
+  assignAgencyCode: (userId, agencyCode) =>
+    request(`/api/admin/agencies/assign/${userId}`, { method: 'PUT', body: { agencyCode } }),
 };

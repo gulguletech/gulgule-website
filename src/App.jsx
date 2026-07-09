@@ -8,17 +8,21 @@ import HowItWorks from './pages/HowItWorks';
 import Safety from './pages/Safety';
 import Download from './pages/Download';
 import AdminApp from './admin/AdminApp';
+import AgencyApp from './agency/AgencyApp';
 
 export default function App() {
-  // The admin console (mounted at /admin/*, reachable only by typing the
-  // URL — there's no link to it anywhere in the public nav) has its own
-  // layout and shouldn't show the marketing site's navbar/footer.
+  // The admin console (mounted at /admin/*) and the agency console (mounted
+  // at /agency/*) are reachable only by typing the URL — there's no link to
+  // either anywhere in the public nav — and each has its own layout, so
+  // neither should show the marketing site's navbar/footer.
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
+  const isAgencyRoute = location.pathname.startsWith('/agency');
+  const isConsoleRoute = isAdminRoute || isAgencyRoute;
 
   return (
     <>
-      {!isAdminRoute && <Navbar />}
+      {!isConsoleRoute && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/features" element={<Features />} />
@@ -26,8 +30,9 @@ export default function App() {
         <Route path="/safety" element={<Safety />} />
         <Route path="/download" element={<Download />} />
         <Route path="/admin/*" element={<AdminApp />} />
+        <Route path="/agency/*" element={<AgencyApp />} />
       </Routes>
-      {!isAdminRoute && <Footer />}
+      {!isConsoleRoute && <Footer />}
     </>
   );
 }
