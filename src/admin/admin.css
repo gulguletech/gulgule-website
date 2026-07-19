@@ -311,6 +311,33 @@
   flex-wrap: wrap;
 }
 
+/* ---------- transaction export bar (date range + download) ---------- */
+.admin-export-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.admin-export-bar__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-export-bar__field label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--adm-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.admin-export-bar__hint {
+  font-size: 0.82rem;
+  color: var(--adm-text-muted);
+}
+
 .admin-select,
 .admin-input {
   font-family: var(--font-body);

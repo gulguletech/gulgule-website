@@ -5,6 +5,66 @@ import { Spinner, EmptyState, ErrorBanner } from '../components/Feedback';
 import Pagination from '../components/Pagination';
 import StatusBadge from '../components/StatusBadge';
 
+// Default export range: last 30 days, inclusive.
+function isoDate(d) {
+  return d.toISOString().slice(0, 10);
+}
+function defaultFrom() {
+  const d = new Date();
+  d.setDate(d.getDate() - 30);
+  return isoDate(d);
+}
+function defaultTo() {
+  return isoDate(new Date());
+}
+
+// Wraps a CSV field in quotes and escapes embedded quotes, if needed.
+function csvField(value) {
+  const s = value === null || value === undefined ? '' : String(value);
+  if (/[",\n]/.test(s)) {
+    return `"${s.replace(/"/g, '""')}"`;
+  }
+  return s;
+}
+
+function transactionsToCsv(rows, includeUserColumns) {
+  const headers = [
+    'Date', 'Type', 'Status', 'Coins', 'Amount', 'Description', 'Reference',
+    ...(includeUserColumns ? ['Username', 'Phone', 'Role'] : []),
+  ];
+  const lines = [headers.map(csvField).join(',')];
+
+  for (const t of rows) {
+    const reference = t.cashfreeOrderId || t.cashfreeTransferId || '';
+    const cells = [
+      t.createdAt ? new Date(t.createdAt).toLocaleString() : '',
+      t.type ?? '',
+      t.status ?? '',
+      t.coins ?? '',
+      t.amount ?? '',
+      t.description ?? '',
+      reference,
+      ...(includeUserColumns ? [t.username ?? '', t.phoneNumber ?? '', t.role ?? ''] : []),
+    ];
+    lines.push(cells.map(csvField).join(','));
+  }
+
+  // Leading BOM so Excel opens the UTF-8 file (₹ symbol etc.) correctly.
+  return '\uFEFF' + lines.join('\r\n');
+}
+
+function downloadCsv(filename, csvContent) {
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
 export default function Transactions() {
   const [searchParams, setSearchParams] = useSearchParams();
   const userId = searchParams.get('userId') || '';
@@ -13,6 +73,11 @@ export default function Transactions() {
   const [page, setPage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
+  const [fromDate, setFromDate] = useState(defaultFrom());
+  const [toDate, setToDate] = useState(defaultTo());
+  const [exporting, setExporting] = useState(false);
+  const [exportError, setExportError] = useState('');
 
   async function load() {
     setLoading(true);
@@ -38,6 +103,33 @@ export default function Transactions() {
 
   const rows = page?.content || [];
 
+  async function handleDownload() {
+    setExportError('');
+    if (!fromDate || !toDate) {
+      setExportError('Pick both a start and end date.');
+      return;
+    }
+    if (toDate < fromDate) {
+      setExportError("'To' date must be on or after 'From' date.");
+      return;
+    }
+    setExporting(true);
+    try {
+      const exportRows = await adminApi.exportTransactions(fromDate, toDate, userId || undefined);
+      if (!exportRows || exportRows.length === 0) {
+        setExportError('No transactions found in that date range.');
+        return;
+      }
+      const csv = transactionsToCsv(exportRows, !userId);
+      const suffix = userId ? '_user' : '_all-users';
+      downloadCsv(`transactions_${fromDate}_to_${toDate}${suffix}.csv`, csv);
+    } catch (err) {
+      setExportError(err.message);
+    } finally {
+      setExporting(false);
+    }
+  }
+
   return (
     <div>
       <div className="admin-page-head">
@@ -60,6 +152,48 @@ export default function Transactions() {
       </div>
 
       <ErrorBanner message={error} onRetry={load} />
+
+      <div className="admin-card">
+        <div className="admin-card__body admin-export-bar">
+          <div className="admin-export-bar__field">
+            <label htmlFor="export-from">From</label>
+            <input
+              id="export-from"
+              type="date"
+              className="admin-input"
+              value={fromDate}
+              max={toDate || undefined}
+              onChange={(e) => setFromDate(e.target.value)}
+            />
+          </div>
+          <div className="admin-export-bar__field">
+            <label htmlFor="export-to">To</label>
+            <input
+              id="export-to"
+              type="date"
+              className="admin-input"
+              value={toDate}
+              min={fromDate || undefined}
+              onChange={(e) => setToDate(e.target.value)}
+            />
+          </div>
+          <button
+            className="admin-btn admin-btn--primary"
+            onClick={handleDownload}
+            disabled={exporting}
+          >
+            {exporting ? 'Preparing…' : '⬇ Download Excel'}
+          </button>
+          {userId && (
+            <span className="admin-export-bar__hint">Exports this user only.</span>
+          )}
+        </div>
+        {exportError && (
+          <div className="admin-card__body" style={{ paddingTop: 0 }}>
+            <ErrorBanner message={exportError} />
+          </div>
+        )}
+      </div>
 
       <div className="admin-card">
         {loading ? (

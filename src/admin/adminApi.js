@@ -75,6 +75,14 @@ export const adminApi = {
   listTransactions: (page = 0, userId) =>
     request(`/api/admin/transactions?page=${page}${userId ? `&userId=${encodeURIComponent(userId)}` : ''}`),
 
+  // Full (unpaginated) list of transactions within an inclusive date range,
+  // used by the "Download Excel" button — from/to are yyyy-MM-dd strings.
+  exportTransactions: (from, to, userId) =>
+    request(
+      `/api/admin/transactions/export?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}` +
+      (userId ? `&userId=${encodeURIComponent(userId)}` : '')
+    ),
+
   ongoingCalls: () => request('/api/admin/calls/ongoing'),
 
   // ── Pricing (coin economics + recharge packages) ────────────────────────
