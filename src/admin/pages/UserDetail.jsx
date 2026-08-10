@@ -10,12 +10,18 @@ export default function UserDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  const [agencyCodeInput, setAgencyCodeInput] = useState('');
+  const [savingAgencyCode, setSavingAgencyCode] = useState(false);
+  const [agencyCodeError, setAgencyCodeError] = useState('');
+  const [agencyCodeToast, setAgencyCodeToast] = useState('');
+
   async function load() {
     setLoading(true);
     setError('');
     try {
       const result = await adminApi.getUser(id);
       setData(result);
+      setAgencyCodeInput(result.user.agencyCode || '');
     } catch (err) {
       setError(err.message);
     } finally {
@@ -27,6 +33,22 @@ export default function UserDetail() {
     load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
+
+  async function handleAssignAgencyCode(e) {
+    e.preventDefault();
+    setAgencyCodeError('');
+    setAgencyCodeToast('');
+    setSavingAgencyCode(true);
+    try {
+      await adminApi.assignAgencyCode(id, agencyCodeInput.trim());
+      setAgencyCodeToast('Agency code updated.');
+      await load();
+    } catch (err) {
+      setAgencyCodeError(err.message);
+    } finally {
+      setSavingAgencyCode(false);
+    }
+  }
 
   if (loading) return <Spinner label="Loading user…" />;
   if (error) return <ErrorBanner message={error} onRetry={load} />;
@@ -90,6 +112,34 @@ export default function UserDetail() {
             <DetailRow label="Verified at">{formatDateTime(user.panVerifiedAt)}</DetailRow>
           </div>
         </div>
+
+        {user.role === 'GIRL' && (
+          <div className="admin-card">
+            <div className="admin-card__head"><h2>Agency code</h2></div>
+            <div className="admin-card__body">
+              <DetailRow label="Current code">{user.agencyCode || '—'}</DetailRow>
+              <DetailRow label="Set at">{formatDateTime(user.agencyCodeSetAt)}</DetailRow>
+              <p style={{ color: 'var(--adm-text-muted)', fontSize: '0.82rem', margin: '4px 0 10px' }}>
+                She can only edit her own agency code within a short window after first
+                setting it. As admin, you can change it here at any time — leave blank to clear it.
+              </p>
+              {agencyCodeToast && <div className="admin-toast">{agencyCodeToast}</div>}
+              {agencyCodeError && <ErrorBanner message={agencyCodeError} />}
+              <form onSubmit={handleAssignAgencyCode} style={{ display: 'flex', gap: 8 }}>
+                <input
+                  className="admin-field"
+                  style={{ flex: 1 }}
+                  value={agencyCodeInput}
+                  onChange={(e) => setAgencyCodeInput(e.target.value.toUpperCase())}
+                  placeholder="e.g. ABC123"
+                />
+                <button type="submit" className="admin-btn admin-btn--primary" disabled={savingAgencyCode}>
+                  {savingAgencyCode ? 'Saving…' : 'Save'}
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
 
         {user.role === 'GIRL' && (
           <div className="admin-card">
