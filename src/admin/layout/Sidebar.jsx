@@ -25,6 +25,12 @@ const icons = {
   agencies: (
     <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" />
   ),
+  screenshot: (
+    <path d="M9 3l-1.83 2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.17L15 3H9zm3 15a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+  ),
+  withdraw: (
+    <path d="M12 4l6 6h-4v8h-4v-8H6l6-6z" />
+  ),
   logout: (
     <path d="M16 17v-3H9v-4h7V7l5 5-5 5M14 2a2 2 0 0 1 2 2v2h-2V4H5v16h9v-2h2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9z" />
   ),
@@ -34,6 +40,8 @@ const NAV_ITEMS = [
   { to: '/admin/dashboard', label: 'Dashboard', icon: 'dashboard' },
   { to: '/admin/users', label: 'Users', icon: 'users' },
   { to: '/admin/verifications', label: 'Verifications', icon: 'verify' },
+  { to: '/admin/recharges', label: 'Recharge Screenshots', icon: 'screenshot' },
+  { to: '/admin/withdrawals', label: 'Withdrawal Requests', icon: 'withdraw' },
   { to: '/admin/transactions', label: 'Transactions', icon: 'transactions' },
   { to: '/admin/calls', label: 'Live calls', icon: 'calls' },
   { to: '/admin/pricing', label: 'Pricing', icon: 'pricing' },

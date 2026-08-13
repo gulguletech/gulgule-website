@@ -15,6 +15,12 @@ export default function UserDetail() {
   const [agencyCodeError, setAgencyCodeError] = useState('');
   const [agencyCodeToast, setAgencyCodeToast] = useState('');
 
+  const [grantCoins, setGrantCoins] = useState('');
+  const [grantNote, setGrantNote] = useState('');
+  const [grantingCoins, setGrantingCoins] = useState(false);
+  const [grantError, setGrantError] = useState('');
+  const [grantToast, setGrantToast] = useState('');
+
   async function load() {
     setLoading(true);
     setError('');
@@ -47,6 +53,29 @@ export default function UserDetail() {
       setAgencyCodeError(err.message);
     } finally {
       setSavingAgencyCode(false);
+    }
+  }
+
+  async function handleGrantCoins(e) {
+    e.preventDefault();
+    setGrantError('');
+    setGrantToast('');
+    const coins = parseInt(grantCoins, 10);
+    if (!coins || coins <= 0) {
+      setGrantError('Enter a positive number of coins.');
+      return;
+    }
+    setGrantingCoins(true);
+    try {
+      const result = await adminApi.grantCoins(id, coins, grantNote.trim() || undefined);
+      setGrantToast(`Added ${coins} coins. New balance: ${result.newBalance}.`);
+      setGrantCoins('');
+      setGrantNote('');
+      await load();
+    } catch (err) {
+      setGrantError(err.message);
+    } finally {
+      setGrantingCoins(false);
     }
   }
 
@@ -107,11 +136,49 @@ export default function UserDetail() {
           <div className="admin-card__head"><h2>PAN verification</h2></div>
           <div className="admin-card__body">
             <DetailRow label="Status">{user.panVerified ? 'Verified' : 'Not verified'}</DetailRow>
-            <DetailRow label="PAN number">{user.panNumber || '—'}</DetailRow>
-            <DetailRow label="Holder name">{user.panHolderName || '—'}</DetailRow>
             <DetailRow label="Verified at">{formatDateTime(user.panVerifiedAt)}</DetailRow>
+            {user.panImageUrl && (
+              <DetailRow label="PAN picture">
+                <a className="admin-link" href={user.panImageUrl} target="_blank" rel="noreferrer">Open</a>
+              </DetailRow>
+            )}
           </div>
         </div>
+
+        {user.role === 'BOY' && (
+          <div className="admin-card">
+            <div className="admin-card__head"><h2>Manually add coins</h2></div>
+            <div className="admin-card__body">
+              <p style={{ color: 'var(--adm-text-muted)', fontSize: '0.82rem', margin: '0 0 10px' }}>
+                Adds coins straight to this user's wallet — no payment involved. Use for goodwill
+                credits, corrections, or off-app payments.
+              </p>
+              {grantToast && <div className="admin-toast">{grantToast}</div>}
+              {grantError && <ErrorBanner message={grantError} />}
+              <form onSubmit={handleGrantCoins} style={{ display: 'flex', gap: 8 }}>
+                <input
+                  className="admin-field"
+                  style={{ width: 120 }}
+                  type="number"
+                  min="1"
+                  value={grantCoins}
+                  onChange={(e) => setGrantCoins(e.target.value)}
+                  placeholder="Coins"
+                />
+                <input
+                  className="admin-field"
+                  style={{ flex: 1 }}
+                  value={grantNote}
+                  onChange={(e) => setGrantNote(e.target.value)}
+                  placeholder="Note (optional)"
+                />
+                <button type="submit" className="admin-btn admin-btn--primary" disabled={grantingCoins}>
+                  {grantingCoins ? 'Adding…' : 'Add coins'}
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
 
         {user.role === 'GIRL' && (
           <div className="admin-card">

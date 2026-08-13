@@ -29,13 +29,12 @@ function csvField(value) {
 
 function transactionsToCsv(rows, includeUserColumns) {
   const headers = [
-    'Date', 'Type', 'Status', 'Coins', 'Amount', 'Description', 'Reference',
+    'Date', 'Type', 'Status', 'Coins', 'Amount', 'Description', 'UPI ID', 'Screenshot', 'Admin Note',
     ...(includeUserColumns ? ['Username', 'Phone', 'Role'] : []),
   ];
   const lines = [headers.map(csvField).join(',')];
 
   for (const t of rows) {
-    const reference = t.cashfreeOrderId || t.cashfreeTransferId || '';
     const cells = [
       t.createdAt ? new Date(t.createdAt).toLocaleString() : '',
       t.type ?? '',
@@ -44,6 +43,9 @@ function transactionsToCsv(rows, includeUserColumns) {
       t.amount ?? '',
       t.description ?? '',
       reference,
+      t.upiId ?? '',
+      t.screenshotUrl ?? '',
+      t.adminNote ?? '',
       ...(includeUserColumns ? [t.username ?? '', t.phoneNumber ?? '', t.role ?? ''] : []),
     ];
     lines.push(cells.map(csvField).join(','));
@@ -210,7 +212,7 @@ export default function Transactions() {
                   <th>Coins</th>
                   <th>Amount</th>
                   <th>Description</th>
-                  <th>Reference</th>
+                  <th>Proof</th>
                   <th>Date</th>
                 </tr>
               </thead>
@@ -223,9 +225,12 @@ export default function Transactions() {
                     <td>{t.amount !== null && t.amount !== undefined ? `₹${t.amount}` : '—'}</td>
                     <td>{t.description || '—'}</td>
                     <td>
-                      {t.cashfreeOrderId && <code title="Cashfree order ID">{t.cashfreeOrderId}</code>}
-                      {t.cashfreeTransferId && <code title="Cashfree transfer ID">{t.cashfreeTransferId}</code>}
-                      {!t.cashfreeOrderId && !t.cashfreeTransferId && '—'}
+                      {t.screenshotUrl && (
+                        <a className="admin-link" href={t.screenshotUrl} target="_blank" rel="noreferrer">Screenshot</a>
+                      )}
+                      {t.upiId && <div><code title="UPI ID">{t.upiId}</code></div>}
+                      {t.adminNote && <div style={{ fontSize: '0.78rem', color: 'var(--adm-text-muted)' }}>{t.adminNote}</div>}
+                      {!t.screenshotUrl && !t.upiId && !t.adminNote && '—'}
                     </td>
                     <td>{formatDateTime(t.createdAt)}</td>
                   </tr>

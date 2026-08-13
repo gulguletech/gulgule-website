@@ -8,6 +8,8 @@ import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
 import UserDetail from './pages/UserDetail';
 import Verifications from './pages/Verifications';
+import Recharges from './pages/Recharges';
+import Withdrawals from './pages/Withdrawals';
 import Transactions from './pages/Transactions';
 import Calls from './pages/Calls';
 import Pricing from './pages/Pricing';
@@ -34,6 +36,8 @@ export default function AdminApp() {
           <Route path="users" element={<Users />} />
           <Route path="users/:id" element={<UserDetail />} />
           <Route path="verifications" element={<Verifications />} />
+          <Route path="recharges" element={<Recharges />} />
+          <Route path="withdrawals" element={<Withdrawals />} />
           <Route path="transactions" element={<Transactions />} />
           <Route path="calls" element={<Calls />} />
           <Route path="pricing" element={<Pricing />} />

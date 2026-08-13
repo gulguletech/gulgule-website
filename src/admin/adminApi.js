@@ -102,6 +102,26 @@ export const adminApi = {
   deleteRechargePackage: (id) =>
     request(`/api/admin/pricing/packages/${id}`, { method: 'DELETE' }),
 
+  // ── Manual wallet moderation (QR recharges + withdrawal requests) ───────
+  pendingRecharges: () => request('/api/admin/wallet/recharges/pending'),
+
+  approveRecharge: (id, note) =>
+    request(`/api/admin/wallet/recharges/${id}/approve`, { method: 'POST', body: { note } }),
+
+  rejectRecharge: (id, reason) =>
+    request(`/api/admin/wallet/recharges/${id}/reject`, { method: 'POST', body: { reason } }),
+
+  pendingWithdrawals: () => request('/api/admin/wallet/withdrawals/pending'),
+
+  approveWithdrawal: (id, note) =>
+    request(`/api/admin/wallet/withdrawals/${id}/approve`, { method: 'POST', body: { note } }),
+
+  rejectWithdrawal: (id, reason) =>
+    request(`/api/admin/wallet/withdrawals/${id}/reject`, { method: 'POST', body: { reason } }),
+
+  grantCoins: (userId, coins, note) =>
+    request('/api/admin/wallet/grant-coins', { method: 'POST', body: { userId, coins, note } }),
+
   // ── Agencies ─────────────────────────────────────────────────────────────
   listAgencies: (page = 0) => request(`/api/admin/agencies?page=${page}`),
 
