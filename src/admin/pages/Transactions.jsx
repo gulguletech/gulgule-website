@@ -42,7 +42,6 @@ function transactionsToCsv(rows, includeUserColumns) {
       t.coins ?? '',
       t.amount ?? '',
       t.description ?? '',
-      reference,
       t.upiId ?? '',
       t.screenshotUrl ?? '',
       t.adminNote ?? '',
