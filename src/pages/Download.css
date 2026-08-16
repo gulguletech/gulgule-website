@@ -63,6 +63,27 @@
 .dl-store-btn small { font-size: 0.7rem; color: #aaa; }
 .dl-store-btn strong { font-size: 0.95rem; font-weight: 700; }
 
+.dl-apk-btn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 18px;
+  width: fit-content;
+  max-width: 100%;
+  background: linear-gradient(135deg, var(--pink), var(--orange));
+  color: #fff;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  padding: 18px 28px;
+  box-shadow: 0 10px 30px rgba(236,28,125,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.dl-apk-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(236,28,125,0.45); }
+.dl-apk-btn__icon { font-size: 1.8rem; line-height: 1; }
+.dl-apk-btn__text { display: flex; flex-direction: column; text-align: left; line-height: 1.35; }
+.dl-apk-btn__text strong { font-size: 1.05rem; font-weight: 800; }
+.dl-apk-btn__text small { font-size: 0.78rem; opacity: 0.9; }
+
 /* ===== PHONE MOCKUP ===== */
 .dl-hero__mockup { display: flex; flex-direction: column; align-items: center; position: relative; }
 .dl-phone {

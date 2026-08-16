@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Reveal from '../components/Reveal';
 import './Download.css';
 
+const APK_URL = 'https://github.com/gulguletech/gulgule-website/releases/download/v1.0/app-release.apk';
+
 export default function Download() {
   const [clicked, setClicked] = useState(null);
   useEffect(() => { window.scrollTo(0, 0); }, []);
@@ -50,29 +52,29 @@ export default function Download() {
                 )}
               </button>
 
-              <button
-                className={`dl-store-btn dl-store-btn--android ${clicked === 'android' ? 'dl-store-btn--success' : ''}`}
+              <a
+                href={APK_URL}
+                download
+                className="dl-store-btn dl-store-btn--android"
                 onClick={() => handleDownload('android')}
               >
-                {clicked === 'android' ? (
-                  <span className="dl-store-btn__inner">
-                    <span className="dl-store-icon">✓</span>
-                    <span>
-                      <small>Coming Soon</small>
-                      <strong>Google Play</strong>
-                    </span>
+                <span className="dl-store-btn__inner">
+                  <span className="dl-store-icon">▶</span>
+                  <span>
+                    <small>Get it on</small>
+                    <strong>Google Play</strong>
                   </span>
-                ) : (
-                  <span className="dl-store-btn__inner">
-                    <span className="dl-store-icon">▶</span>
-                    <span>
-                      <small>Get it on</small>
-                      <strong>Google Play</strong>
-                    </span>
-                  </span>
-                )}
-              </button>
+                </span>
+              </a>
             </div>
+
+            <a href={APK_URL} download className="dl-apk-btn">
+              <span className="dl-apk-btn__icon">⬇</span>
+              <span className="dl-apk-btn__text">
+                <strong>Download APK Directly</strong>
+                <small>For Android · 366 MB · v1.0</small>
+              </span>
+            </a>
 
             <p className="dl-note">Free download · No credit card · Works on iOS 13+ and Android 8+</p>
           </div>
@@ -157,12 +159,12 @@ export default function Download() {
                   <span><small>Download on the</small><strong>App Store</strong></span>
                 </span>
               </button>
-              <button className="dl-store-btn dl-store-btn--android" onClick={() => handleDownload('android2')}>
+              <a href={APK_URL} download className="dl-store-btn dl-store-btn--android" onClick={() => handleDownload('android2')}>
                 <span className="dl-store-btn__inner">
                   <span className="dl-store-icon">▶</span>
                   <span><small>Get it on</small><strong>Google Play</strong></span>
                 </span>
-              </button>
+              </a>
             </div>
           </Reveal>
         </div>
