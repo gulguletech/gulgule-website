@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Reveal from '../components/Reveal';
 import './Download.css';
 
-const APK_URL = 'https://github.com/gulguletech/gulgule-website/releases/download/untagged-1e91cfcefab857e6ee75/app-release.apk';
+const APK_URL = 'https://github.com/gulguletech/gulgule-website/releases/download/v2.0/app-release.apk';
 
 export default function Download() {
   useEffect(() => { window.scrollTo(0, 0); }, []);
