@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Reveal from '../components/Reveal';
 import './Download.css';
 
 const APK_URL = 'https://github.com/gulguletech/onaroy-website/releases/download/v1.0.0/app-release.apk';
 
 export default function Download() {
-  const [clicked, setClicked] = useState(null);
   useEffect(() => { window.scrollTo(0, 0); }, []);
-
-  const handleDownload = (platform) => {
-    setClicked(platform);
-    setTimeout(() => setClicked(null), 2500);
-  };
 
   return (
     <div className="download-page">
@@ -113,7 +107,7 @@ export default function Download() {
             <div className="dl-final-rating">⭐⭐⭐⭐⭐ <span>Rated 4.8 by 200,000+ users</span></div>
             <h2>Join 2 million people<br />making new friends right now.</h2>
             <div className="dl-buttons dl-buttons--centered">
-              <a href={APK_URL} download className="dl-apk-btn" onClick={() => handleDownload('android2')}>
+              <a href={APK_URL} download className="dl-apk-btn">
                 <span className="dl-apk-btn__icon">⬇</span>
                 <span className="dl-apk-btn__text">
                   <strong>Download APK Directly</strong>
