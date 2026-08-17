@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Reveal from '../components/Reveal';
 import './Download.css';
 
-const APK_URL = 'https://github.com/gulguletech/gulgule-website/releases/download/v1.0/app-release.apk';
+const APK_URL = 'https://github.com/gulguletech/onaroy-website/releases/download/v1.0.0/app-release.apk';
 
 export default function Download() {
   const [clicked, setClicked] = useState(null);
@@ -28,51 +28,11 @@ export default function Download() {
             <h1>GulGule is free.<br /><span className="grad-text">Download & start.</span></h1>
             <p>No account needed to install. Your first new friend is one tap away.</p>
 
-            <div className="dl-buttons">
-              <button
-                className={`dl-store-btn dl-store-btn--ios ${clicked === 'ios' ? 'dl-store-btn--success' : ''}`}
-                onClick={() => handleDownload('ios')}
-              >
-                {clicked === 'ios' ? (
-                  <span className="dl-store-btn__inner">
-                    <span className="dl-store-icon">✓</span>
-                    <span>
-                      <small>Coming Soon</small>
-                      <strong>App Store</strong>
-                    </span>
-                  </span>
-                ) : (
-                  <span className="dl-store-btn__inner">
-                    <span className="dl-store-icon">🍎</span>
-                    <span>
-                      <small>Download on the</small>
-                      <strong>App Store</strong>
-                    </span>
-                  </span>
-                )}
-              </button>
-
-              <a
-                href={APK_URL}
-                download
-                className="dl-store-btn dl-store-btn--android"
-                onClick={() => handleDownload('android')}
-              >
-                <span className="dl-store-btn__inner">
-                  <span className="dl-store-icon">▶</span>
-                  <span>
-                    <small>Get it on</small>
-                    <strong>Google Play</strong>
-                  </span>
-                </span>
-              </a>
-            </div>
-
             <a href={APK_URL} download className="dl-apk-btn">
               <span className="dl-apk-btn__icon">⬇</span>
               <span className="dl-apk-btn__text">
                 <strong>Download APK Directly</strong>
-                <small>For Android · 366 MB · v1.0</small>
+                <small>For Android · 366 MB · v1.0.0</small>
               </span>
             </a>
 
@@ -153,16 +113,11 @@ export default function Download() {
             <div className="dl-final-rating">⭐⭐⭐⭐⭐ <span>Rated 4.8 by 200,000+ users</span></div>
             <h2>Join 2 million people<br />making new friends right now.</h2>
             <div className="dl-buttons dl-buttons--centered">
-              <button className="dl-store-btn dl-store-btn--ios" onClick={() => handleDownload('ios2')}>
-                <span className="dl-store-btn__inner">
-                  <span className="dl-store-icon">🍎</span>
-                  <span><small>Download on the</small><strong>App Store</strong></span>
-                </span>
-              </button>
-              <a href={APK_URL} download className="dl-store-btn dl-store-btn--android" onClick={() => handleDownload('android2')}>
-                <span className="dl-store-btn__inner">
-                  <span className="dl-store-icon">▶</span>
-                  <span><small>Get it on</small><strong>Google Play</strong></span>
+              <a href={APK_URL} download className="dl-apk-btn" onClick={() => handleDownload('android2')}>
+                <span className="dl-apk-btn__icon">⬇</span>
+                <span className="dl-apk-btn__text">
+                  <strong>Download APK Directly</strong>
+                  <small>For Android · 366 MB · v1.0.0</small>
                 </span>
               </a>
             </div>

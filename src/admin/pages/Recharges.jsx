@@ -25,7 +25,11 @@ export default function Recharges() {
     }
   }
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+    const interval = setInterval(load, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   async function handleApprove(id) {
     setBusyId(id);
