@@ -107,7 +107,7 @@ export default function Privacy() {
             <div className="privacy-block privacy-block--address">
               <h2>Registered Office</h2>
               <p>
-                LumX Pvt. Ltd.<br />
+                onaroy industries  Pvt. Ltd.<br />
                 3rd Floor, Vajra Building, Bellandur, NGEF Layout,<br />
                 Sadanandanagar, Bennigana Halli, Bengaluru, Karnataka 560038
               </p>
