@@ -29,7 +29,7 @@ export default function Footer() {
         <div className="footer__links-group">
           <h4>Trust</h4>
           <Link to="/safety">Safety</Link>
-          <a href="#!">Privacy Policy</a>
+          <Link to="/privacy">Privacy Policy</Link>
           <a href="#!">Terms of Service</a>
         </div>
 

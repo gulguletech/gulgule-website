@@ -7,6 +7,7 @@ import Features from './pages/Features';
 import HowItWorks from './pages/HowItWorks';
 import Safety from './pages/Safety';
 import Download from './pages/Download';
+import Privacy from './pages/Privacy';
 import AdminApp from './admin/AdminApp';
 import AgencyApp from './agency/AgencyApp';
 
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/how-it-works" element={<HowItWorks />} />
         <Route path="/safety" element={<Safety />} />
         <Route path="/download" element={<Download />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="/admin/*" element={<AdminApp />} />
         <Route path="/agency/*" element={<AgencyApp />} />
       </Routes>
