@@ -107,9 +107,10 @@ export default function Privacy() {
             <div className="privacy-block privacy-block--address">
               <h2>Registered Office</h2>
               <p>
-                onaroy industries  Pvt. Ltd.<br />
-                3rd Floor, Vajra Building, Bellandur, NGEF Layout,<br />
-                Sadanandanagar, Bennigana Halli, Bengaluru, Karnataka 560038
+                Onaroy Industries Private Limited<br />
+                F Coworking Building, Cabin No.126, 1-10-176, Begumpet,<br />
+                Secunderabad, Hyderabad, Telangana.<br />
+                gulguletech@gmail.com
               </p>
             </div>
           </Reveal>

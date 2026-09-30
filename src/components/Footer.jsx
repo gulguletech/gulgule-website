@@ -30,6 +30,7 @@ export default function Footer() {
           <h4>Trust</h4>
           <Link to="/safety">Safety</Link>
           <Link to="/privacy">Privacy Policy</Link>
+          <Link to="/delete-account">Delete Account</Link>
           <a href="#!">Terms of Service</a>
         </div>
 
@@ -54,10 +55,10 @@ export default function Footer() {
 
       <div className="footer__bottom">
         <p className="footer__address">
-         3rd Floor, Vajra Building, Bellandur, NGEF Layout,
-          Sadanandanagar, Bennigana Halli, Bengaluru, Karnataka 560038
+          F Coworking Building, Cabin No.126, 1-10-176, Begumpet,
+          Secunderabad, Hyderabad, Telangana.
         </p>
-        <p>Copyright 2026 @ LumX Pvt. Ltd. All rights reserved.</p>
+        <p>Copyright 2026 @ Onaroy Industries Private Limited. All rights reserved.</p>
       </div>
     </footer>
   );

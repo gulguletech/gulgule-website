@@ -73,3 +73,13 @@
 @media (max-width: 540px) {
   .privacy-card { padding: 28px 22px; }
 }
+
+/* ===== DELETE ACCOUNT PAGE ===== */
+.delete-list {
+  margin: 0 0 12px 20px;
+  padding: 0;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+.delete-list li { margin-bottom: 6px; }
