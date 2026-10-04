@@ -9,6 +9,7 @@ import Safety from './pages/Safety';
 import Download from './pages/Download';
 import Privacy from './pages/Privacy';
 import DeleteAccount from './pages/DeleteAccount';
+import ChildSafety from './pages/ChildSafety';
 import AdminApp from './admin/AdminApp';
 import AgencyApp from './agency/AgencyApp';
 
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="/download" element={<Download />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/delete-account" element={<DeleteAccount />} />
+        <Route path="/child-safety" element={<ChildSafety />} />
         <Route path="/admin/*" element={<AdminApp />} />
         <Route path="/agency/*" element={<AgencyApp />} />
       </Routes>

@@ -31,6 +31,7 @@ export default function Footer() {
           <Link to="/safety">Safety</Link>
           <Link to="/privacy">Privacy Policy</Link>
           <Link to="/delete-account">Delete Account</Link>
+          <Link to="/child-safety">Child Safety</Link>
           <a href="#!">Terms of Service</a>
         </div>
 
