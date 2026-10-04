@@ -29,6 +29,9 @@ const TONE_MAP = {
   MONEY_EARN: 'good',
   WITHDRAWAL: 'pink',
   REFUND: 'warn',
+  // user reports
+  OPEN: 'warn',
+  RESOLVED: 'good',
 };
 
 export default function StatusBadge({ value }) {

@@ -12,6 +12,7 @@ import Recharges from './pages/Recharges';
 import Withdrawals from './pages/Withdrawals';
 import Transactions from './pages/Transactions';
 import Calls from './pages/Calls';
+import Reports from './pages/Reports';
 import Pricing from './pages/Pricing';
 import Agencies from './pages/Agencies';
 import AgencyDetail from './pages/AgencyDetail';
@@ -40,6 +41,7 @@ export default function AdminApp() {
           <Route path="withdrawals" element={<Withdrawals />} />
           <Route path="transactions" element={<Transactions />} />
           <Route path="calls" element={<Calls />} />
+          <Route path="reports" element={<Reports />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="agencies" element={<Agencies />} />
           <Route path="agencies/:id" element={<AgencyDetail />} />

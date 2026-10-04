@@ -85,6 +85,19 @@ export const adminApi = {
 
   ongoingCalls: () => request('/api/admin/calls/ongoing'),
 
+  // ── User reports (from the app's Report button) ──────────────────────────
+  listReports: (page = 0, status) =>
+    request(`/api/admin/reports?page=${page}${status ? `&status=${encodeURIComponent(status)}` : ''}`),
+
+  resolveReport: (id, note) =>
+    request(`/api/admin/reports/${id}/resolve`, { method: 'POST', body: { note } }),
+
+  banReportedUser: (id, note) =>
+    request(`/api/admin/reports/${id}/ban`, { method: 'POST', body: { note } }),
+
+  unbanUser: (userId) =>
+    request(`/api/admin/reports/unban/${userId}`, { method: 'POST' }),
+
   // ── Pricing (coin economics + recharge packages) ────────────────────────
   getPricingConfig: () => request('/api/admin/pricing'),
 

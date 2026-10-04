@@ -28,6 +28,9 @@ const icons = {
   screenshot: (
     <path d="M9 3l-1.83 2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.17L15 3H9zm3 15a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-2a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
   ),
+  reports: (
+    <path d="M14.4 6 14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z" />
+  ),
   withdraw: (
     <path d="M12 4l6 6h-4v8h-4v-8H6l6-6z" />
   ),
@@ -44,6 +47,7 @@ const NAV_ITEMS = [
   { to: '/admin/withdrawals', label: 'Withdrawal Requests', icon: 'withdraw' },
   { to: '/admin/transactions', label: 'Transactions', icon: 'transactions' },
   { to: '/admin/calls', label: 'Live calls', icon: 'calls' },
+  { to: '/admin/reports', label: 'User reports', icon: 'reports' },
   { to: '/admin/pricing', label: 'Pricing', icon: 'pricing' },
   { to: '/admin/agencies', label: 'Agencies', icon: 'agencies' },
 ];
