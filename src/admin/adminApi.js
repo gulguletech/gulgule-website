@@ -64,6 +64,11 @@ export const adminApi = {
 
   getUser: (id) => request(`/api/admin/users/${id}`),
 
+  // Creates a girl profile that is already approved (no selfie/voice needed).
+  // She shows up in the app like any other girl, but calls to her always say "busy".
+  createGirl: (girl) =>
+    request('/api/admin/users/create-girl', { method: 'POST', body: girl }),
+
   pendingVerifications: () => request('/api/admin/verifications/pending'),
 
   approveVerification: (girlId) =>

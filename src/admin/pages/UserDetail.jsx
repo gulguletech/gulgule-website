@@ -104,6 +104,9 @@ export default function UserDetail() {
           <div className="admin-card__body">
             <DetailRow label="Role"><StatusBadge value={user.role} /></DetailRow>
             <DetailRow label="Verification"><StatusBadge value={user.verificationStatus} /></DetailRow>
+            {user.adminCreated && (
+              <DetailRow label="Created by admin">Yes — pre-approved, calls always show busy</DetailRow>
+            )}
             <DetailRow label="Description">{user.description || '—'}</DetailRow>
             <DetailRow label="Interests">{(user.interests || []).join(', ') || '—'}</DetailRow>
             <DetailRow label="Languages">{(user.languages || []).join(', ') || '—'}</DetailRow>
