@@ -103,6 +103,16 @@ export const adminApi = {
   unbanUser: (userId) =>
     request(`/api/admin/reports/unban/${userId}`, { method: 'POST' }),
 
+  // ── Permanently blocked phone numbers ────────────────────────────────────
+  listBlockedPhones: (page = 0, search) =>
+    request(`/api/admin/blocked-phones?page=${page}${search ? `&search=${encodeURIComponent(search)}` : ''}`),
+
+  blockPhone: (phoneNumber, reason) =>
+    request('/api/admin/blocked-phones', { method: 'POST', body: { phoneNumber, reason } }),
+
+  unblockPhone: (id) =>
+    request(`/api/admin/blocked-phones/${id}`, { method: 'DELETE' }),
+
   // ── Pricing (coin economics + recharge packages) ────────────────────────
   getPricingConfig: () => request('/api/admin/pricing'),
 

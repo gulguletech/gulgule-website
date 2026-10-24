@@ -31,6 +31,9 @@ const icons = {
   reports: (
     <path d="M14.4 6 14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z" />
   ),
+  block: (
+    <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zM4 12a8 8 0 0 1 12.9-6.3L5.7 16.9A7.96 7.96 0 0 1 4 12zm8 8a7.96 7.96 0 0 1-4.9-1.7L18.3 7.1A8 8 0 0 1 12 20z" />
+  ),
   withdraw: (
     <path d="M12 4l6 6h-4v8h-4v-8H6l6-6z" />
   ),
@@ -48,6 +51,7 @@ const NAV_ITEMS = [
   { to: '/admin/transactions', label: 'Transactions', icon: 'transactions' },
   { to: '/admin/calls', label: 'Live calls', icon: 'calls' },
   { to: '/admin/reports', label: 'User reports', icon: 'reports' },
+  { to: '/admin/blocked-numbers', label: 'Blocked numbers', icon: 'block' },
   { to: '/admin/pricing', label: 'Pricing', icon: 'pricing' },
   { to: '/admin/agencies', label: 'Agencies', icon: 'agencies' },
 ];
